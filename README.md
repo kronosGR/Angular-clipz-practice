@@ -3,6 +3,7 @@
 * Angular
 * TypeScript
 * Tailwind Css & PurgeCss
+* Modules, Services, Components
 
 ## Notes
 ```
