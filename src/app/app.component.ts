@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { ModalService } from './services/modal.service';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,11 +6,5 @@ import { ModalService } from './services/modal.service';
 })
 export class AppComponent {
   title = 'Angular-clipz-practice';
-  showModal = true;
 
-  constructor(public modal: ModalService){}
-
-  ngOnInit() {
-    setInterval(() => (this.showModal = !this.showModal), 1000);
-  }
 }
