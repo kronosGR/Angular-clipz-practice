@@ -1,4 +1,10 @@
-import { Component, ContentChildren, AfterContentInit, QueryList } from '@angular/core';
+import {
+  Component,
+  ContentChildren,
+  AfterContentInit,
+  QueryList,
+  Input,
+} from '@angular/core';
 import { TabComponent } from '../tab/tab.component';
 
 @Component({
@@ -7,11 +13,24 @@ import { TabComponent } from '../tab/tab.component';
   styleUrls: ['./tabs-container.component.css'],
 })
 export class TabsContainerComponent implements AfterContentInit {
-  @ContentChildren(TabComponent) tabs: QueryList<TabComponent> = new QueryList();
+  @ContentChildren(TabComponent) tabs: QueryList<TabComponent> =
+    new QueryList();
 
   constructor() {}
 
   ngAfterContentInit(): void {
-    
+    const activeTabs = this.tabs?.filter((tab) => tab.active);
+
+    if (!activeTabs || activeTabs.length === 0) {
+      this.selectedTab(this.tabs.first);
+    }
+  }
+
+  selectedTab(tab: TabComponent) {
+    this.tabs?.forEach((tab) => {
+      tab.active = false;
+    });
+
+    tab.active = true;
   }
 }
