@@ -1,15 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
+  registerForm = new FormGroup({
+    name: new FormControl(''), // default value empty string
+    email: new FormControl(''),
+    age: new FormControl(''),
+    password: new FormControl(''),
+    confirm_password: new FormControl(''),
+    phoneNumber: new FormControl(''),
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  })
 
 }
