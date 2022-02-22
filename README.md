@@ -4,6 +4,7 @@
 * TypeScript
 * Tailwind Css & PurgeCss
 * Modules, Services, Components
+* Reactive and Template Forms
 
 ## Notes
 ```
