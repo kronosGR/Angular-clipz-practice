@@ -7,7 +7,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent {
-  name = new FormControl('', [Validators.required]); // default value empty string
+  name = new FormControl('', [Validators.required, Validators.minLength(3)]); // default value empty string
   email = new FormControl('');
   age = new FormControl('');
   password = new FormControl('');
@@ -22,5 +22,4 @@ export class RegisterComponent {
     confirm_password: this.confirm_password,
     phoneNumber: this.phoneNumber,
   });
-
 }
