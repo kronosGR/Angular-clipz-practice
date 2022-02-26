@@ -5,7 +5,7 @@
 * Tailwind Css & PurgeCss
 * Modules, Services, Components
 * Reactive and Template Forms
-* Firebase for BE
+* Firebase for BE (@angulare/fire)
 * * Firestore
 * 
 
