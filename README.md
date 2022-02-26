@@ -5,6 +5,9 @@
 * Tailwind Css & PurgeCss
 * Modules, Services, Components
 * Reactive and Template Forms
+* Firebase for BE
+* * Firestore
+* 
 
 ## Notes
 ```
