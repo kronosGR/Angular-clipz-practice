@@ -5,6 +5,7 @@ import {
   AngularFirestoreCollection,
 } from '@angular/fire/compat/firestore';
 import IUser from '../models/user.model';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,7 @@ export class AuthService {
   private usersCollection: AngularFirestoreCollection<IUser>;
 
   constructor(private auth: AngularFireAuth, private db: AngularFirestore) {
-    this.usersCollection = db.collection('users')
+    this.usersCollection = db.collection('users');
   }
 
   public async CreateUser(userData: IUser) {
@@ -24,11 +25,20 @@ export class AuthService {
       userData.email,
       userData.password
     );
-    await this.usersCollection.add({
+
+    if (!userCred.user) {
+      throw new Error("User can't be found");
+    }
+
+    await this.usersCollection.doc(userCred.user.uid).set({
       name: userData.name,
       email: userData.email,
       age: userData.age,
       phoneNumber: userData.phoneNumber,
+    });
+
+    await userCred.user.updateProfile({
+      displayName: userData.name,
     });
   }
 }
