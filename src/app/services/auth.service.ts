@@ -6,15 +6,18 @@ import {
 } from '@angular/fire/compat/firestore';
 import IUser from '../models/user.model';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private usersCollection: AngularFirestoreCollection<IUser>;
+  public isAuthenticated$: Observable<boolean>;
 
   constructor(private auth: AngularFireAuth, private db: AngularFirestore) {
     this.usersCollection = db.collection('users');
+    this.isAuthenticated$ = auth.user.pipe(map((user) => !!user));
   }
 
   public async CreateUser(userData: IUser) {
