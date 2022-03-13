@@ -53,6 +53,8 @@ export class UploadComponent implements OnInit {
   }
 
   uploadFile() {
+    this.uploadForm.disable();
+
     this.showAlert = true;
     this.alertColor = 'blue';
     this.alertMsg = 'Please wait! Your clip is being uploaded';
@@ -81,17 +83,19 @@ export class UploadComponent implements OnInit {
             uid: this.user?.uid as string,
             displayName: this.user?.displayName as string,
             title: this.title.value,
-            filename: `${clipFileName}.mp4` ,
+            filename: `${clipFileName}.mp4`,
             url,
           };
 
-          this.clipsService.createClip(clip)
+          this.clipsService.createClip(clip);
 
           this.alertColor = 'green';
           this.alertMsg = 'Success!';
           this.showPercentage = false;
         },
         error: (error) => {
+          this.uploadForm.enable();
+          
           this.alertColor = 'red';
           this.alertMsg = 'Upload Failed. Try again later.';
           this.inSubmission = true;
