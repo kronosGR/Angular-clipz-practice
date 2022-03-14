@@ -10,7 +10,7 @@ import firebase from 'firebase/compat/app';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { ClipService } from '../../services/clip.service';
 import IClip from '../../models/clip.model';
-import {  Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-upload',
@@ -39,7 +39,7 @@ export class UploadComponent implements OnDestroy {
     private storage: AngularFireStorage,
     private auth: AngularFireAuth,
     private clipsService: ClipService,
-    private router:Router
+    private router: Router
   ) {
     auth.user.subscribe((user) => (this.user = user));
   }
@@ -95,6 +95,7 @@ export class UploadComponent implements OnDestroy {
             title: this.title.value,
             filename: `${clipFileName}.mp4`,
             url,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
           };
 
           const clipDocRef = await this.clipsService.createClip(clip);
@@ -104,9 +105,7 @@ export class UploadComponent implements OnDestroy {
           this.showPercentage = false;
 
           setTimeout(() => {
-            this.router.navigate([
-              'clip', clipDocRef.id
-            ])
+            this.router.navigate(['clip', clipDocRef.id]);
           }, 1000);
         },
         error: (error) => {
