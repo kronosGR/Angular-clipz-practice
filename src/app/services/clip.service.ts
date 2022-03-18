@@ -31,7 +31,7 @@ export class ClipService {
         }
 
         const query = this.clipsCollection.ref.where(
-          'uid', '==','user.uid'
+          'uid', '==',user.uid
         )
 
         return query.get()
