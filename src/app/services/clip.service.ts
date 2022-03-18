@@ -19,24 +19,28 @@ export class ClipService {
     this.clipsCollection = db.collection('clips');
   }
 
-  createClip(data: IClip): Promise<DocumentReference<IClip>>{
+  createClip(data: IClip): Promise<DocumentReference<IClip>> {
     return this.clipsCollection.add(data);
   }
 
-  getUserClips(){
+  getUserClips() {
     return this.auth.user.pipe(
-      switchMap(user => {
-        if (!user){
-          return of([])
+      switchMap((user) => {
+        if (!user) {
+          return of([]);
         }
 
-        const query = this.clipsCollection.ref.where(
-          'uid', '==',user.uid
-        )
+        const query = this.clipsCollection.ref.where('uid', '==', user.uid);
 
-        return query.get()
+        return query.get();
       }),
-      map(snapshot => (snapshot as QuerySnapshot<IClip>).docs)
-    )
+      map((snapshot) => (snapshot as QuerySnapshot<IClip>).docs)
+    );
+  }
+
+  updateClip(id: string, title: string) {
+    return this.clipsCollection.doc(id).update({
+      title,
+    });
   }
 }
