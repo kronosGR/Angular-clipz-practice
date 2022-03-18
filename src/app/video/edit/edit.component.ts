@@ -1,5 +1,6 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { ModalService } from '../../services/modal.service';
+import IClip from '../../models/clip.model';
 
 @Component({
   selector: 'app-edit',
@@ -7,6 +8,7 @@ import { ModalService } from '../../services/modal.service';
   styleUrls: ['./edit.component.css'],
 })
 export class EditComponent implements OnInit, OnDestroy {
+  @Input() activeClip: IClip | null = null;
   constructor(private modal: ModalService) {}
 
   ngOnInit(): void {
