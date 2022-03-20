@@ -30,6 +30,7 @@ export class UploadComponent implements OnDestroy {
   showPercentage = false;
   user: firebase.User | null = null;
   task?: AngularFireUploadTask;
+  screenshots: string[] = [];
 
   title = new FormControl('', [Validators.required, Validators.minLength(3)]);
   uploadForm = new FormGroup({
@@ -44,7 +45,7 @@ export class UploadComponent implements OnDestroy {
     public ffmpegService: FfmpegService
   ) {
     auth.user.subscribe((user) => (this.user = user));
-    this.ffmpegService.init()
+    this.ffmpegService.init();
   }
 
   ngOnDestroy(): void {
@@ -61,7 +62,7 @@ export class UploadComponent implements OnDestroy {
       return;
     }
 
-    await this.ffmpegService.getScreenshots(this.file)
+    this.screenshots = await this.ffmpegService.getScreenshots(this.file);
 
     this.title.setValue(this.file.name.replace(/\.[^/.]+$/, ''));
     this.nextStep = true;
