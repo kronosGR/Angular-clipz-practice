@@ -7,7 +7,7 @@
 * Reactive and Template Forms
 * Firebase for BE (@angulare/fire)
 * * Firestore
-* 
+* Video.js
 
 ## Notes
 ```
